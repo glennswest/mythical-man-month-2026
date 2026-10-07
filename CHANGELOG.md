@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### 2026-10-07
+- **docs:** first and last commit dates and days elapsed per repository (owner)
 - **docs:** buildbox2 left out (owner)
 - **docs:** dellsw (not stormcos) and the five unstarted NIC-driver repos left out (owner)
 - **docs:** "What isn't Rust" table and a component connection diagram (Mermaid) (owner)
