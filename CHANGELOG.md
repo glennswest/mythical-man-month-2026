@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### 2026-10-07
+- **docs:** "What isn't Rust" table and a component connection diagram (Mermaid) (owner)
 - **docs:** baremetalservices removed: a separate utility, not stormcos (owner)
 - **docs:** root-level CI and build scripts, models and code generation excluded too: 561,342 shipped lines, 95.8% Rust
 - **docs:** build and test scripts excluded from the count (owner): 573,601 shipped lines, 94.3% Rust

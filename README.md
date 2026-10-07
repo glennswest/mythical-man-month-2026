@@ -84,8 +84,179 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | HTML | 842 | 0.2% |
 | Shell | 487 | 0.1% |
 
-Not Rust, and shipped: the web UIs (Svelte, JavaScript, CSS, HTML in stormcentral, stormconsole, stormdrive, stormd, stormview and stormrfb's browser client), and must-gather's small collector scripts.
+## What isn't Rust
 
-Not counted: **baremetalservices**, a separate utility (its own Linux boot environment), not part of stormcos.
+Everything stormcos ships that isn't Rust is browser code for the web UIs, plus a few hundred lines of shell:
+
+| Language | Code lines | Where it ships |
+|---|---:|---|
+| Svelte | 16,111 | the web UIs: stormcentral, stormconsole, stormdrive, stormd, stormview |
+| JavaScript | 2,347 | the same UIs, and stormrfb's browser client |
+| CSS | 1,503 | the web UIs |
+| HTML | 842 | the web UIs |
+| Shell | 487 | must-gather's collector scripts (stormcos_qa) and flowsdn's install check |
+
+There is no Go and no Python in anything stormcos ships. Not counted: **baremetalservices**, a separate utility (its own Linux boot environment), not part of stormcos.
+
+## How the components connect
+
+Arrows mean *uses*, taken from each project's declared dependencies in stormcentral. Dotted arrows go to **stormd**, the process supervisor most services run under. Not drawn: **stormcos** itself, which composes every component into the release image, and the **stormview** UI library.
+
+```mermaid
+flowchart TB
+  subgraph boot["Boot"]
+    stormbootx["stormbootx"]
+    stormnic_e1000e["stormnic-e1000e"]
+    stormnic_i40e["stormnic-i40e"]
+    stormnic_igb["stormnic-igb"]
+    stormnic_ixgbe["stormnic-ixgbe"]
+    stormnic_mlx4["stormnic-mlx4"]
+    stormnic_mlx5["stormnic-mlx5"]
+    stormnic_realtek["stormnic-realtek"]
+    stormnic_virtio["stormnic-virtio"]
+    stormuefi["stormuefi"]
+  end
+  subgraph node["Node"]
+    cadvisor["cadvisor"]
+    rustkube_node["rustkube-node"]
+    stormcast["stormcast"]
+    stormimds["stormimds"]
+    stormipmi["stormipmi"]
+    stormpump["stormpump"]
+    stormrdp["stormrdp"]
+    stormvm["stormvm"]
+    vmcloud_image_operator["vmcloud-image-operator"]
+  end
+  subgraph storage["Storage"]
+    fio_dos_rs["fio.dos.rs"]
+    fio_ext4_rs["fio.ext4.rs"]
+    fio_xfs_rs["fio.xfs.rs"]
+    mkfs_dos_rs["mkfs.dos.rs"]
+    mkfs_ext4_rs["mkfs.ext4.rs"]
+    mkfs_xfs_rs["mkfs.xfs.rs"]
+    stormblock["stormblock"]
+    stormblock_csi["stormblock-csi"]
+    stormblock_registry["stormblock-registry"]
+    stormdrive["stormdrive"]
+    stormraid["stormraid"]
+    stormstorage["stormstorage"]
+  end
+  subgraph control_plane["Control plane"]
+    fastetcd["fastetcd"]
+    rustkube["rustkube"]
+    stormcert["stormcert"]
+    stormlb["stormlb"]
+  end
+  subgraph network["Network"]
+    flowsdn["flowsdn"]
+    network_operator["network-operator"]
+    stormcoredns["stormcoredns"]
+    stormcos_cilium["stormcos-cilium"]
+  end
+  subgraph platform["Platform"]
+    stormcluster["stormcluster"]
+    stormupdate["stormupdate"]
+  end
+  subgraph options["Options"]
+    irondirectory["irondirectory"]
+    irondirectory_operator["irondirectory-operator"]
+    nextnfs["nextnfs"]
+    nextnfs_operator["nextnfs-operator"]
+    rocketsmbd["rocketsmbd"]
+    rocketsmbd_operator["rocketsmbd-operator"]
+    stormcos_options["stormcos-options"]
+  end
+  subgraph ui["UI"]
+    stormcentral["stormcentral"]
+    stormconsole["stormconsole"]
+    stormrfb["stormrfb"]
+    stormview["stormview"]
+  end
+  subgraph tooling["Tooling"]
+    buildbox2["buildbox2"]
+    minismbd["minismbd"]
+    sc["sc"]
+    stormd["stormd"]
+  end
+  subgraph product["Product"]
+    stormcos["stormcos"]
+  end
+  subgraph qa["QA"]
+    stormcos_qa["stormcos_qa"]
+  end
+  subgraph other["Other"]
+    dellsw["dellsw"]
+    sectionsystems["sectionsystems"]
+    storminstall["storminstall"]
+    stormpanel["stormpanel"]
+  end
+  buildbox2 --> stormvm
+  buildbox2 --> stormblock
+  flowsdn --> rustkube_node
+  irondirectory --> fastetcd
+  irondirectory_operator --> irondirectory
+  irondirectory_operator --> stormcos_options
+  network_operator --> rustkube
+  network_operator --> stormcos_cilium
+  nextnfs -.-> stormd
+  nextnfs_operator --> nextnfs
+  nextnfs_operator --> stormcos_options
+  rocketsmbd -.-> stormd
+  rocketsmbd_operator --> rocketsmbd
+  rocketsmbd_operator --> stormcos_options
+  rustkube --> fastetcd
+  rustkube --> stormcert
+  rustkube --> stormlb
+  rustkube -.-> stormd
+  rustkube_node --> rustkube
+  rustkube_node --> stormpump
+  rustkube_node --> stormvm
+  sc --> rustkube
+  sectionsystems --> stormcos
+  stormblock_csi --> stormblock
+  stormblock_csi --> rustkube
+  stormblock_registry --> stormblock
+  stormblock_registry -.-> stormd
+  stormbootx --> stormblock
+  stormcert -.-> stormd
+  stormcluster --> stormcos
+  stormcluster --> rustkube
+  stormcluster --> fastetcd
+  stormcluster --> stormcert
+  stormcluster --> stormlb
+  stormcluster --> stormconsole
+  stormconsole --> rustkube
+  stormconsole --> stormrfb
+  stormconsole -.-> stormd
+  stormcoredns -.-> stormd
+  stormcos_options --> rustkube
+  stormcos_qa --> stormcos
+  stormcos_qa --> stormblock_csi
+  stormd --> stormcast
+  stormdrive --> stormblock
+  stormdrive -.-> stormd
+  stormimds -.-> stormd
+  storminstall --> stormbootx
+  storminstall --> sc
+  stormipmi --> rustkube
+  stormipmi -.-> stormd
+  stormlb -.-> stormd
+  stormpanel --> stormpump
+  stormpump --> stormcast
+  stormpump --> stormblock
+  stormpump --> stormblock_registry
+  stormrdp --> stormvm
+  stormstorage --> stormblock
+  stormstorage --> stormdrive
+  stormstorage -.-> stormd
+  stormuefi --> stormblock
+  stormupdate --> stormcos
+  stormupdate --> stormblock
+  stormupdate --> rustkube
+  stormupdate --> stormconsole
+  stormvm --> stormpump
+  stormvm --> stormblock
+  vmcloud_image_operator --> stormvm
+```
 
 The five newest NIC-driver repositories (stormnic-igb, -e1000e, -i40e, -mlx5, -realtek) were created on 2026-10-07 and hold no code yet.
