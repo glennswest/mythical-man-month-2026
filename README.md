@@ -78,6 +78,10 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | HTML | 842 | 0.2% |
 | Shell | 487 | 0.1% |
 
+## In short
+
+About **65 hours of human attention** over **232 days**, roughly **17 minutes a day**, for **559,317 lines of shipped code** (96.2% Rust): about **8,550 shipped lines per human hour**. The one-minute-per-issue figure is generous: many issues are filed and closed by the AI sessions themselves, and the human time went mostly into decisions.
+
 ## What isn't Rust
 
 Everything stormcos ships that isn't Rust is browser code for the web UIs, plus a few hundred lines of shell:
