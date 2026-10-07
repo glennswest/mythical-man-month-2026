@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### 2026-10-07
+- **docs:** stormcos-cilium left out: no shipped code (owner)
 - **docs:** first and last commit dates and days elapsed per repository (owner)
 - **docs:** buildbox2 left out (owner)
 - **docs:** dellsw (not stormcos) and the five unstarted NIC-driver repos left out (owner)

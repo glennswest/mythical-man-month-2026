@@ -2,7 +2,7 @@
 
 *stormcos: an operating system, Kubernetes, storage and networking stack written by one person and a fleet of AI coding sessions.*
 
-**55 repositories · 559,317 lines of shipped code · 96.2% Rust · 232 days, 2026-02-17 to 2026-10-07**
+**54 repositories · 559,317 lines of shipped code · 96.2% Rust · 232 days, 2026-02-17 to 2026-10-07**
 
 Counted from each repository's own source (`git ls-files`, `measure.py`): code lines only, no blanks or comments, and **only what the project ships**. Excluded: tests (test directories, fixtures, test data, benches, examples, Rust's inline `#[cfg(test)]` modules), build, CI and tooling scripts (`deploy/`, `scripts/`, `tools/`, `hack/`, `packaging/`, `ci/`, `.github/`, `xtask/`, root-level `ci-*.sh` and `build*.sh`, image-build and code-generation helpers, models and conformance helpers, `build.rs`, Makefiles), vendored code and docs. Days run from a repository's first commit to its latest, inclusive. Snapshot: 2026-10-07.
 
@@ -22,7 +22,6 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | network | [flowsdn](https://github.com/glennswest/flowsdn) | flowsdn is a Rust networking stack for stormcos, implementing a CNI plugin and | Rust | 100% | 43,305 | 2026-09-07 | 2026-10-07 | 31 |
 | network | [network-operator](https://github.com/glennswest/network-operator) | Cluster Network Operator for the rustkube/stormcos stack — manages the Cilium CNI lifecycle from a Network CR (install/upgrade/reconcile/status). CNO-equivalent, in Rust. | Rust | 100% | 3,469 | 2026-07-20 | 2026-10-06 | 79 |
 | network | [stormcoredns](https://github.com/glennswest/stormcoredns) | CoreDNS reimplemented in Rust: Corefile, plugin chain, and the full plugin set | Rust | 100% | 14,457 | 2026-08-29 | 2026-10-07 | 39 |
-| network | [stormcos-cilium](https://github.com/glennswest/stormcos-cilium) | Cilium for stormcos: pinned by digest, converted to goldens, and tested | — | — | 0 | 2026-09-07 | 2026-10-07 | 31 |
 | node | [cadvisor](https://github.com/glennswest/cadvisor) | Container metrics exporter (cadvisor-compatible) for the rustkube stack, in Rust | Rust | 100% | 5,141 | 2026-07-16 | 2026-10-07 | 83 |
 | node | [rustkube-node](https://github.com/glennswest/rustkube-node) | Node level of rustkube (Rust Kubernetes): kubelet, kube-proxy, cni | Rust | 100% | 28,502 | 2026-07-15 | 2026-10-07 | 85 |
 | node | [stormcast](https://github.com/glennswest/stormcast) | The emit half of the storm log path: one wire format, never blocking. | Rust | 100% | 407 | 2026-08-25 | 2026-10-07 | 43 |
@@ -141,7 +140,6 @@ flowchart TB
     flowsdn["flowsdn"]
     network_operator["network-operator"]
     stormcoredns["stormcoredns"]
-    stormcos_cilium["stormcos-cilium"]
   end
   subgraph platform["Platform"]
     stormcluster["stormcluster"]
@@ -183,7 +181,6 @@ flowchart TB
   irondirectory_operator --> irondirectory
   irondirectory_operator --> stormcos_options
   network_operator --> rustkube
-  network_operator --> stormcos_cilium
   nextnfs -.-> stormd
   nextnfs_operator --> nextnfs
   nextnfs_operator --> stormcos_options
