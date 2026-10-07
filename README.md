@@ -2,7 +2,7 @@
 
 *stormcos: an operating system, Kubernetes, storage and networking stack written by one person and a fleet of AI coding sessions.*
 
-**56 repositories · 559,317 lines of shipped code · 96.2% Rust**
+**55 repositories · 559,317 lines of shipped code · 96.2% Rust**
 
 Counted from each repository's own source (`git ls-files`, `measure.py`): code lines only, no blanks or comments, and **only what the project ships**. Excluded: tests (test directories, fixtures, test data, benches, examples, Rust's inline `#[cfg(test)]` modules), build, CI and tooling scripts (`deploy/`, `scripts/`, `tools/`, `hack/`, `packaging/`, `ci/`, `.github/`, `xtask/`, root-level `ci-*.sh` and `build*.sh`, image-build and code-generation helpers, models and conformance helpers, `build.rs`, Makefiles), vendored code and docs. Snapshot: 2026-10-07.
 
@@ -56,7 +56,6 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | ui | [stormconsole](https://github.com/glennswest/stormconsole) | StormCOS web console — pluggable OpenShift-style console built on stormd and stormview | Rust | 64% | 25,769 |
 | ui | [stormrfb](https://github.com/glennswest/stormrfb) | RFB (RFC 6143) in Rust — sans-I/O codec, a client for stormconsole and a server for the Rust VMM's display | Rust | 93% | 2,985 |
 | ui | [stormview](https://github.com/glennswest/stormview) | The storm view contract and UI system: one shape every storm daemon | Svelte | 10% | 1,925 |
-| tooling | [buildbox2](https://github.com/glennswest/buildbox2) | The build environment as a golden: dev's toolchains on Fedora 44, one VM per build | — | — | 0 |
 | tooling | [minismbd](https://github.com/glennswest/minismbd) | Admin/boot-media SMB server: read-only, client allowlist, SMB1+SMB2, time-boxed — spun off rocketsmbd | Rust | 100% | 6,112 |
 | tooling | [sc](https://github.com/glennswest/sc) | One binary for a StormCOS fleet, covering three surfaces an operator should | Rust | 100% | 2,798 |
 | tooling | [stormd](https://github.com/glennswest/stormd) | A container init for scratch images: one static binary that is PID 1, | Rust | 92% | 13,349 |
@@ -161,7 +160,6 @@ flowchart TB
     stormview["stormview"]
   end
   subgraph tooling["Tooling"]
-    buildbox2["buildbox2"]
     minismbd["minismbd"]
     sc["sc"]
     stormd["stormd"]
@@ -177,8 +175,6 @@ flowchart TB
     storminstall["storminstall"]
     stormpanel["stormpanel"]
   end
-  buildbox2 --> stormvm
-  buildbox2 --> stormblock
   flowsdn --> rustkube_node
   irondirectory --> fastetcd
   irondirectory_operator --> irondirectory
