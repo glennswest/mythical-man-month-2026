@@ -2,9 +2,9 @@
 
 *stormcos: an operating system, Kubernetes, storage and networking stack written by one person and a fleet of AI coding sessions.*
 
-**63 repositories · 573,601 lines of shipped code · 94.3% Rust**
+**63 repositories · 561,342 lines of shipped code · 95.8% Rust**
 
-Counted from each repository's own source (`git ls-files`, `measure.py`): code lines only, no blanks or comments, and **only what the project ships**. Excluded: tests (test directories, fixtures, test data, benches, examples, Rust's inline `#[cfg(test)]` modules), build and test scripts (`deploy/`, `scripts/`, `tools/`, `hack/`, `packaging/`, `ci/`, `.github/`, `xtask/`, `build.rs`, Makefiles), vendored code and docs. Snapshot: 2026-10-07.
+Counted from each repository's own source (`git ls-files`, `measure.py`): code lines only, no blanks or comments, and **only what the project ships**. Excluded: tests (test directories, fixtures, test data, benches, examples, Rust's inline `#[cfg(test)]` modules), build, CI and tooling scripts (`deploy/`, `scripts/`, `tools/`, `hack/`, `packaging/`, `ci/`, `.github/`, `xtask/`, root-level `ci-*.sh` and `build*.sh`, image-build and code-generation helpers, models and conformance helpers, `build.rs`, Makefiles), vendored code and docs. Snapshot: 2026-10-07.
 
 | Area | Repository | What it is | Main language | Rust | Code lines |
 |---|---|---|---|---:|---:|
@@ -20,15 +20,15 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | boot | [stormnic-realtek](https://github.com/glennswest/stormnic-realtek) | Rust no_std UEFI SNP driver for Realtek RTL8111/8168, RTL8125, RTL8126, loaded by stormbootx | — | — | 0 |
 | boot | [stormnic-virtio](https://github.com/glennswest/stormnic-virtio) | Rust no_std UEFI SNP driver for virtio-net (modern, virtio 1.x), loaded by stormbootx | Rust | 100% | 2,522 |
 | boot | [stormuefi](https://github.com/glennswest/stormuefi) | Read-only stormblock asset reader for UEFI — descriptor + extent map, resolved before the kernel exists | Rust | 100% | 1,567 |
-| control-plane | [fastetcd](https://github.com/glennswest/fastetcd) | Rust, wire-compatible replacement for etcd v3. Multi-node Raft. Targets realtime / low-overhead environments. | Rust | 99% | 18,760 |
+| control-plane | [fastetcd](https://github.com/glennswest/fastetcd) | Rust, wire-compatible replacement for etcd v3. Multi-node Raft. Targets realtime / low-overhead environments. | Rust | 100% | 18,615 |
 | control-plane | [rustkube](https://github.com/glennswest/rustkube) | K8s API-compatible container orchestrator in Rust | Rust | 100% | 31,073 |
 | control-plane | [stormcert](https://github.com/glennswest/stormcert) | Certificate plane for the Storm platform - issue, renew, deliver, reload, verify. Rust. | Rust | 100% | 9,744 |
 | control-plane | [stormlb](https://github.com/glennswest/stormlb) | Rust API/ingress VIP load balancer for the Storm stack — health-checked L4 + VRRP (L2) / BGP-anycast (L3). The pre-cluster control-plane LB. | Rust | 100% | 2,940 |
-| network | [flowsdn](https://github.com/glennswest/flowsdn) | flowsdn is a Rust networking stack for stormcos, implementing a CNI plugin and | Rust | 100% | 43,332 |
+| network | [flowsdn](https://github.com/glennswest/flowsdn) | flowsdn is a Rust networking stack for stormcos, implementing a CNI plugin and | Rust | 100% | 43,305 |
 | network | [network-operator](https://github.com/glennswest/network-operator) | Cluster Network Operator for the rustkube/stormcos stack — manages the Cilium CNI lifecycle from a Network CR (install/upgrade/reconcile/status). CNO-equivalent, in Rust. | Rust | 100% | 3,469 |
 | network | [stormcoredns](https://github.com/glennswest/stormcoredns) | CoreDNS reimplemented in Rust: Corefile, plugin chain, and the full plugin set | Rust | 100% | 14,457 |
 | network | [stormcos-cilium](https://github.com/glennswest/stormcos-cilium) | Cilium for stormcos: pinned by digest, converted to goldens, and tested | — | — | 0 |
-| node | [cadvisor](https://github.com/glennswest/cadvisor) | Container metrics exporter (cadvisor-compatible) for the rustkube stack, in Rust | Rust | 97% | 5,286 |
+| node | [cadvisor](https://github.com/glennswest/cadvisor) | Container metrics exporter (cadvisor-compatible) for the rustkube stack, in Rust | Rust | 100% | 5,141 |
 | node | [rustkube-node](https://github.com/glennswest/rustkube-node) | Node level of rustkube (Rust Kubernetes): kubelet, kube-proxy, cni | Rust | 100% | 28,502 |
 | node | [stormcast](https://github.com/glennswest/stormcast) | The emit half of the storm log path: one wire format, never blocking. | Rust | 100% | 407 |
 | node | [stormimds](https://github.com/glennswest/stormimds) | Instance Metadata Service — the endpoint a guest asks who it is | Rust | 100% | 1,791 |
@@ -43,22 +43,22 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | storage | [mkfs.dos.rs](https://github.com/glennswest/mkfs.dos.rs) | Async FAT12/FAT16/FAT32 formatter and checker in pure Rust — a from-scratch reimplementation of mkfs.fat and fsck.fat | Rust | 100% | 3,040 |
 | storage | [mkfs.ext4.rs](https://github.com/glennswest/mkfs.ext4.rs) | Async, parallel ext2/ext3/ext4 formatter and checker in pure Rust — a from-scratch reimplementation of mke2fs and e2fsck | Rust | 100% | 11,420 |
 | storage | [mkfs.xfs.rs](https://github.com/glennswest/mkfs.xfs.rs) | Async XFS formatter and checker in pure Rust — a from-scratch reimplementation of mkfs.xfs and xfs_repair -n | Rust | 100% | 3,311 |
-| storage | [stormblock](https://github.com/glennswest/stormblock) | Pure Rust enterprise block storage engine — NVMe-oF/TCP + iSCSI targets with software RAID | Rust | 93% | 74,297 |
+| storage | [stormblock](https://github.com/glennswest/stormblock) | Pure Rust enterprise block storage engine — NVMe-oF/TCP + iSCSI targets with software RAID | Rust | 98% | 70,437 |
 | storage | [stormblock-csi](https://github.com/glennswest/stormblock-csi) | A CSI driver and a wandering-RAID1 operator for StormBlock, in Rust. A | Rust | 100% | 7,117 |
-| storage | [stormblock-registry](https://github.com/glennswest/stormblock-registry) | An OCI registry that turns each pushed image into a golden: a sealed | Rust | 100% | 23,471 |
-| storage | [stormdrive](https://github.com/glennswest/stormdrive) | Physical drive management for one storage node. stormdrive knows what the | Rust | 91% | 15,435 |
+| storage | [stormblock-registry](https://github.com/glennswest/stormblock-registry) | An OCI registry that turns each pushed image into a golden: a sealed | Rust | 100% | 23,439 |
+| storage | [stormdrive](https://github.com/glennswest/stormdrive) | Physical drive management for one storage node. stormdrive knows what the | Rust | 91% | 15,417 |
 | storage | [stormstorage](https://github.com/glennswest/stormstorage) | The storage control plane across Storm nodes and clusters. | Rust | 98% | 8,371 |
-| platform | [baremetalservices](https://github.com/glennswest/baremetalservices) | Bootable image to handle hardware discovery, and configuration | Go | 0% | 2,467 |
+| platform | [baremetalservices](https://github.com/glennswest/baremetalservices) | Bootable image to handle hardware discovery, and configuration | Go | 0% | 2,025 |
 | platform | [stormcluster](https://github.com/glennswest/stormcluster) | stormcos day-2 cluster operator: discover peers, form a cluster (masters/workers), join and split nodes (a split node reverts to SNO) | Rust | 100% | 6,228 |
 | platform | [stormupdate](https://github.com/glennswest/stormupdate) | stormcos updater: watch the release catalog and upgrade a running cluster to the next release, every level (OS pallets, kernel, goldens, Kubernetes), node by node with drain, health gates and rollback | Rust | 100% | 4,172 |
 | options | [irondirectory](https://github.com/glennswest/irondirectory) | A FIPS-compliant, Active Directory–compatible identity provider written in | Rust | 100% | 9,356 |
 | options | [irondirectory-operator](https://github.com/glennswest/irondirectory-operator) | stormcos operator for irondirectory: instances, drives, fleet | Rust | 100% | 1,320 |
-| options | [nextnfs](https://github.com/glennswest/nextnfs) | High-performance, standalone NFSv4.0/4.1 server over a real filesystem, written in Rust. Runs as a static musl binary… | Rust | 95% | 18,635 |
+| options | [nextnfs](https://github.com/glennswest/nextnfs) | High-performance, standalone NFSv4.0/4.1 server over a real filesystem, written in Rust. Runs as a static musl binary… | Rust | 100% | 14,817 |
 | options | [nextnfs-operator](https://github.com/glennswest/nextnfs-operator) | stormcos operator for nextnfs: instances, drives, fleet | Rust | 100% | 1,304 |
 | options | [rocketsmbd](https://github.com/glennswest/rocketsmbd) | High-performance smbd replacement in Rust: io_uring end-to-end, zero-copy file-to-socket | Rust | 100% | 7,237 |
 | options | [rocketsmbd-operator](https://github.com/glennswest/rocketsmbd-operator) | stormcos operator for rocketsmbd: instances, drives, fleet | Rust | 100% | 1,921 |
 | options | [stormcos-options](https://github.com/glennswest/stormcos-options) | stormcos operator for stormcos: instances, drives, fleet | Rust | 100% | 1,653 |
-| ui | [stormcentral](https://github.com/glennswest/stormcentral) | StormCOS mission control: component issues and releases, and a Claude session per project | Rust | 84% | 38,772 |
+| ui | [stormcentral](https://github.com/glennswest/stormcentral) | StormCOS mission control: component issues and releases, and a Claude session per project | Rust | 84% | 38,675 |
 | ui | [stormconsole](https://github.com/glennswest/stormconsole) | StormCOS web console — pluggable OpenShift-style console built on stormd and stormview | Rust | 64% | 25,769 |
 | ui | [stormrfb](https://github.com/glennswest/stormrfb) | RFB (RFC 6143) in Rust — sans-I/O codec, a client for stormconsole and a server for the Rust VMM's display | Rust | 93% | 2,985 |
 | ui | [stormview](https://github.com/glennswest/stormview) | The storm view contract and UI system: one shape every storm daemon | Svelte | 10% | 1,925 |
@@ -70,21 +70,22 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | not yet in an area | [sectionsystems](https://github.com/glennswest/sectionsystems) | sectionsystems: StormCOS operator that verifies each node against the manifest it carries, at boot and at unpredictable intervals; serves sc verify and a status endpoint | Rust | 100% | 2,289 |
 | not yet in an area | [storminstall](https://github.com/glennswest/storminstall) | StormCOS installer: author install-config.yaml (TUI), write it into the boot ISO's config volume, download the ISO and sc, and watch the first node's install — Linux, macOS, Windows | Rust | 100% | 4,215 |
 | not yet in an area | [stormpanel](https://github.com/glennswest/stormpanel) | stormpanel: a graphical node status panel drawn directly on the console with KMS/DRM — temperatures, CPU, memory, disks, network, power, storage and cluster health, for servers and laptops | Rust | 100% | 4,047 |
-| not yet in an area | [stormraid](https://github.com/glennswest/stormraid) | stormraid: high-performance RAID for pve and stormcos: writes at RAID0 speed with ECC written alongside the data, asynchronous ECC verification, and three-level bit-rot checking | Rust | 81% | 18,918 |
+| not yet in an area | [stormraid](https://github.com/glennswest/stormraid) | stormraid: high-performance RAID for pve and stormcos: writes at RAID0 speed with ECC written alongside the data, asynchronous ECC verification, and three-level bit-rot checking | Rust | 100% | 15,243 |
 
-| | **Total** | | | **94.3%** | **573,601** |
+| | **Total** | | | **95.8%** | **561,342** |
 
 ## By language (shipped code)
 
 | Language | Code lines | Share |
 |---|---:|---:|
-| Rust | 540,987 | 94.3% |
-| Svelte | 16,111 | 2.8% |
-| Shell | 5,779 | 1.0% |
-| Python | 4,007 | 0.7% |
+| Rust | 538,027 | 95.8% |
+| Svelte | 16,111 | 2.9% |
 | JavaScript | 2,347 | 0.4% |
 | Go | 2,025 | 0.4% |
 | CSS | 1,503 | 0.3% |
 | HTML | 842 | 0.1% |
+| Shell | 487 | 0.1% |
+
+Not Rust, and shipped: the web UIs (Svelte, JavaScript, CSS, HTML in stormcentral, stormconsole, stormdrive, stormd, stormview and stormrfb's browser client), baremetalservices' Go server, and must-gather's small collector scripts.
 
 The five newest NIC-driver repositories (stormnic-igb, -e1000e, -i40e, -mlx5, -realtek) were created on 2026-10-07 and hold no code yet.

@@ -1,7 +1,7 @@
 import os,re,subprocess,json,sys
 EXT={".rs":"Rust",".sh":"Shell",".bash":"Shell",".py":"Python",".go":"Go",".c":"C",".h":"C",".cc":"C++",".cpp":"C++",".js":"JavaScript",".mjs":"JavaScript",".cjs":"JavaScript",".ts":"TypeScript",".svelte":"Svelte",".swift":"Swift",".html":"HTML",".css":"CSS",".nix":"Nix",".lua":"Lua",".pl":"Perl",".rb":"Ruby",".java":"Java",".kt":"Kotlin",".zig":"Zig",".S":"Assembly",".s":"Assembly",".asm":"Assembly",".bpf.c":"C"}
-SKIPDIR=re.compile(r'(^|/)(tests?|testdata|test-data|fixtures?|benches?|examples?|e2e|vendor|third_party|3rdparty|docs?|node_modules|target|dist|build|golden|goldens|testing|spec|specs|mocks?|scripts|deploy|tools|hack|packaging|ci|\.github|bench|xtask)(/|$)', re.I)
-SKIPFILE=re.compile(r'(^build\.rs$|^Makefile$|_test\.(go|py|rs)$|^test_.*\.py$|\.test\.(js|ts|mjs)$|\.spec\.(js|ts)$|(^|/)check-[^/]*\.sh$|(^|/)test[^/]*\.sh$)', re.I)
+SKIPDIR=re.compile(r'(^|/)(tests?|testdata|test-data|fixtures?|benches?|examples?|e2e|vendor|third_party|3rdparty|docs?|node_modules|target|dist|build|golden|goldens|testing|spec|specs|mocks?|scripts|deploy|tools|hack|packaging|ci|\.github|bench|xtask|model|conformance|pxeimage|proto)(/|$)', re.I)
+SKIPFILE=re.compile(r'(^build\.rs$|^Makefile$|^ci-[^/]*\.sh$|^build[^/]*\.sh$|^rebuild\.sh$|^install-[^/]*\.sh$|^vendor\.sh$|^strip_annotations\.py$|^import-[^/]*\.py$|_test\.(go|py|rs)$|^test_.*\.py$|\.test\.(js|ts|mjs)$|\.spec\.(js|ts)$|(^|/)check-[^/]*\.sh$|(^|/)test[^/]*\.sh$)', re.I)
 def strip_rust_tests(src):
     out=[];i=0;n=len(src)
     while True:
