@@ -89,6 +89,9 @@ Everything stormcos ships that isn't Rust is browser code for the web UIs, plus 
 | HTML | 842 | the web UIs |
 | Shell | 487 | must-gather's collector scripts (stormcos_qa) and flowsdn's install check |
 
+There is no Go and no Python in anything stormcos ships.
+
+Not counted, because they are not part of stormcos: **baremetalservices** (a separate utility, its own Linux boot environment), **dellsw** (switch tooling) and **buildbox2** (the build machine image). Repositories not yet started are left out until they hold code.
 
 ## How the components connect
 
