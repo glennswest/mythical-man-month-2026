@@ -218,6 +218,14 @@ flowchart TB
   stormblock_registry --> stormblock
   stormblock_registry -.-> stormd
   stormbootx --> stormblock
+  stormbootx --> stormnic_ixgbe
+  stormbootx --> stormnic_mlx4
+  stormbootx --> stormnic_virtio
+  stormbootx --> stormnic_igb
+  stormbootx --> stormnic_e1000e
+  stormbootx --> stormnic_i40e
+  stormbootx --> stormnic_mlx5
+  stormbootx --> stormnic_realtek
   stormcert -.-> stormd
   stormcluster --> stormcos
   stormcluster --> rustkube
