@@ -2,7 +2,7 @@
 
 *stormcos: an operating system, Kubernetes, storage and networking stack written by one person and a fleet of AI coding sessions.*
 
-**63 repositories · 561,342 lines of shipped code · 95.8% Rust**
+**62 repositories · 559,317 lines of shipped code · 96.2% Rust**
 
 Counted from each repository's own source (`git ls-files`, `measure.py`): code lines only, no blanks or comments, and **only what the project ships**. Excluded: tests (test directories, fixtures, test data, benches, examples, Rust's inline `#[cfg(test)]` modules), build, CI and tooling scripts (`deploy/`, `scripts/`, `tools/`, `hack/`, `packaging/`, `ci/`, `.github/`, `xtask/`, root-level `ci-*.sh` and `build*.sh`, image-build and code-generation helpers, models and conformance helpers, `build.rs`, Makefiles), vendored code and docs. Snapshot: 2026-10-07.
 
@@ -48,7 +48,6 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | storage | [stormblock-registry](https://github.com/glennswest/stormblock-registry) | An OCI registry that turns each pushed image into a golden: a sealed | Rust | 100% | 23,439 |
 | storage | [stormdrive](https://github.com/glennswest/stormdrive) | Physical drive management for one storage node. stormdrive knows what the | Rust | 91% | 15,417 |
 | storage | [stormstorage](https://github.com/glennswest/stormstorage) | The storage control plane across Storm nodes and clusters. | Rust | 98% | 8,371 |
-| platform | [baremetalservices](https://github.com/glennswest/baremetalservices) | Bootable image to handle hardware discovery, and configuration | Go | 0% | 2,025 |
 | platform | [stormcluster](https://github.com/glennswest/stormcluster) | stormcos day-2 cluster operator: discover peers, form a cluster (masters/workers), join and split nodes (a split node reverts to SNO) | Rust | 100% | 6,228 |
 | platform | [stormupdate](https://github.com/glennswest/stormupdate) | stormcos updater: watch the release catalog and upgrade a running cluster to the next release, every level (OS pallets, kernel, goldens, Kubernetes), node by node with drain, health gates and rollback | Rust | 100% | 4,172 |
 | options | [irondirectory](https://github.com/glennswest/irondirectory) | A FIPS-compliant, Active Directory–compatible identity provider written in | Rust | 100% | 9,356 |
@@ -72,20 +71,21 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | not yet in an area | [stormpanel](https://github.com/glennswest/stormpanel) | stormpanel: a graphical node status panel drawn directly on the console with KMS/DRM — temperatures, CPU, memory, disks, network, power, storage and cluster health, for servers and laptops | Rust | 100% | 4,047 |
 | not yet in an area | [stormraid](https://github.com/glennswest/stormraid) | stormraid: high-performance RAID for pve and stormcos: writes at RAID0 speed with ECC written alongside the data, asynchronous ECC verification, and three-level bit-rot checking | Rust | 100% | 15,243 |
 
-| | **Total** | | | **95.8%** | **561,342** |
+| | **Total** | | | **96.2%** | **559,317** |
 
 ## By language (shipped code)
 
 | Language | Code lines | Share |
 |---|---:|---:|
-| Rust | 538,027 | 95.8% |
+| Rust | 538,027 | 96.2% |
 | Svelte | 16,111 | 2.9% |
 | JavaScript | 2,347 | 0.4% |
-| Go | 2,025 | 0.4% |
 | CSS | 1,503 | 0.3% |
-| HTML | 842 | 0.1% |
+| HTML | 842 | 0.2% |
 | Shell | 487 | 0.1% |
 
-Not Rust, and shipped: the web UIs (Svelte, JavaScript, CSS, HTML in stormcentral, stormconsole, stormdrive, stormd, stormview and stormrfb's browser client), baremetalservices' Go server, and must-gather's small collector scripts.
+Not Rust, and shipped: the web UIs (Svelte, JavaScript, CSS, HTML in stormcentral, stormconsole, stormdrive, stormd, stormview and stormrfb's browser client), and must-gather's small collector scripts.
+
+Not counted: **baremetalservices**, a separate utility (its own Linux boot environment), not part of stormcos.
 
 The five newest NIC-driver repositories (stormnic-igb, -e1000e, -i40e, -mlx5, -realtek) were created on 2026-10-07 and hold no code yet.
