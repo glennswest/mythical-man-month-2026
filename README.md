@@ -2,7 +2,7 @@
 
 *stormcos: an operating system, Kubernetes, storage and networking stack written by one person and a fleet of AI coding sessions.*
 
-**62 repositories · 559,317 lines of shipped code · 96.2% Rust**
+**56 repositories · 559,317 lines of shipped code · 96.2% Rust**
 
 Counted from each repository's own source (`git ls-files`, `measure.py`): code lines only, no blanks or comments, and **only what the project ships**. Excluded: tests (test directories, fixtures, test data, benches, examples, Rust's inline `#[cfg(test)]` modules), build, CI and tooling scripts (`deploy/`, `scripts/`, `tools/`, `hack/`, `packaging/`, `ci/`, `.github/`, `xtask/`, root-level `ci-*.sh` and `build*.sh`, image-build and code-generation helpers, models and conformance helpers, `build.rs`, Makefiles), vendored code and docs. Snapshot: 2026-10-07.
 
@@ -11,13 +11,8 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | product | [stormcos](https://github.com/glennswest/stormcos) | stormcos — the platform's one operating system. An image-based node OS | Rust | 100% | 319 |
 | qa | [stormcos_qa](https://github.com/glennswest/stormcos_qa) | stormcos QA: test standard, runner (auto-files issues), and must-gather; tombstones failed images | Rust | 99% | 6,360 |
 | boot | [stormbootx](https://github.com/glennswest/stormbootx) | A UEFI NVMe/TCP boot extension: boot a machine from a remote image with no kernel, no initramfs and no PXE | Rust | 100% | 8,661 |
-| boot | [stormnic-e1000e](https://github.com/glennswest/stormnic-e1000e) | Rust no_std UEFI SNP driver for Intel e1000e (82574L, 82579, I217–I219), loaded by stormbootx | — | — | 0 |
-| boot | [stormnic-i40e](https://github.com/glennswest/stormnic-i40e) | Rust no_std UEFI SNP driver for Intel i40e (X710, XL710, XXV710, X722), loaded by stormbootx | — | — | 0 |
-| boot | [stormnic-igb](https://github.com/glennswest/stormnic-igb) | Rust no_std UEFI SNP driver for Intel igb (i350, i210/i211, 82576/82580), loaded by stormbootx | — | — | 0 |
 | boot | [stormnic-ixgbe](https://github.com/glennswest/stormnic-ixgbe) | Rust no_std UEFI SNP driver for Intel 82599/X540/X552 10G, loaded by stormbootx | Rust | 100% | 4,326 |
 | boot | [stormnic-mlx4](https://github.com/glennswest/stormnic-mlx4) | Rust no_std UEFI SNP driver for Mellanox ConnectX-3, loaded by stormbootx | Rust | 100% | 3,584 |
-| boot | [stormnic-mlx5](https://github.com/glennswest/stormnic-mlx5) | Rust no_std UEFI SNP driver for Mellanox mlx5 (ConnectX-4/4 Lx/5/6), loaded by stormbootx | — | — | 0 |
-| boot | [stormnic-realtek](https://github.com/glennswest/stormnic-realtek) | Rust no_std UEFI SNP driver for Realtek RTL8111/8168, RTL8125, RTL8126, loaded by stormbootx | — | — | 0 |
 | boot | [stormnic-virtio](https://github.com/glennswest/stormnic-virtio) | Rust no_std UEFI SNP driver for virtio-net (modern, virtio 1.x), loaded by stormbootx | Rust | 100% | 2,522 |
 | boot | [stormuefi](https://github.com/glennswest/stormuefi) | Read-only stormblock asset reader for UEFI — descriptor + extent map, resolved before the kernel exists | Rust | 100% | 1,567 |
 | control-plane | [fastetcd](https://github.com/glennswest/fastetcd) | Rust, wire-compatible replacement for etcd v3. Multi-node Raft. Targets realtime / low-overhead environments. | Rust | 100% | 18,615 |
@@ -65,7 +60,6 @@ Counted from each repository's own source (`git ls-files`, `measure.py`): code l
 | tooling | [minismbd](https://github.com/glennswest/minismbd) | Admin/boot-media SMB server: read-only, client allowlist, SMB1+SMB2, time-boxed — spun off rocketsmbd | Rust | 100% | 6,112 |
 | tooling | [sc](https://github.com/glennswest/sc) | One binary for a StormCOS fleet, covering three surfaces an operator should | Rust | 100% | 2,798 |
 | tooling | [stormd](https://github.com/glennswest/stormd) | A container init for scratch images: one static binary that is PID 1, | Rust | 92% | 13,349 |
-| infra | [dellsw](https://github.com/glennswest/dellsw) | Configuration and operational notes for Dell EMC ONIE-based switches in the home lab. | — | — | 0 |
 | not yet in an area | [sectionsystems](https://github.com/glennswest/sectionsystems) | sectionsystems: StormCOS operator that verifies each node against the manifest it carries, at boot and at unpredictable intervals; serves sc verify and a status endpoint | Rust | 100% | 2,289 |
 | not yet in an area | [storminstall](https://github.com/glennswest/storminstall) | StormCOS installer: author install-config.yaml (TUI), write it into the boot ISO's config volume, download the ISO and sc, and watch the first node's install — Linux, macOS, Windows | Rust | 100% | 4,215 |
 | not yet in an area | [stormpanel](https://github.com/glennswest/stormpanel) | stormpanel: a graphical node status panel drawn directly on the console with KMS/DRM — temperatures, CPU, memory, disks, network, power, storage and cluster health, for servers and laptops | Rust | 100% | 4,047 |
@@ -96,7 +90,6 @@ Everything stormcos ships that isn't Rust is browser code for the web UIs, plus 
 | HTML | 842 | the web UIs |
 | Shell | 487 | must-gather's collector scripts (stormcos_qa) and flowsdn's install check |
 
-There is no Go and no Python in anything stormcos ships. Not counted: **baremetalservices**, a separate utility (its own Linux boot environment), not part of stormcos.
 
 ## How the components connect
 
@@ -106,13 +99,8 @@ Arrows mean *uses*, taken from each project's declared dependencies in stormcent
 flowchart TB
   subgraph boot["Boot"]
     stormbootx["stormbootx"]
-    stormnic_e1000e["stormnic-e1000e"]
-    stormnic_i40e["stormnic-i40e"]
-    stormnic_igb["stormnic-igb"]
     stormnic_ixgbe["stormnic-ixgbe"]
     stormnic_mlx4["stormnic-mlx4"]
-    stormnic_mlx5["stormnic-mlx5"]
-    stormnic_realtek["stormnic-realtek"]
     stormnic_virtio["stormnic-virtio"]
     stormuefi["stormuefi"]
   end
@@ -185,7 +173,6 @@ flowchart TB
     stormcos_qa["stormcos_qa"]
   end
   subgraph other["Other"]
-    dellsw["dellsw"]
     sectionsystems["sectionsystems"]
     storminstall["storminstall"]
     stormpanel["stormpanel"]
@@ -221,11 +208,6 @@ flowchart TB
   stormbootx --> stormnic_ixgbe
   stormbootx --> stormnic_mlx4
   stormbootx --> stormnic_virtio
-  stormbootx --> stormnic_igb
-  stormbootx --> stormnic_e1000e
-  stormbootx --> stormnic_i40e
-  stormbootx --> stormnic_mlx5
-  stormbootx --> stormnic_realtek
   stormcert -.-> stormd
   stormcluster --> stormcos
   stormcluster --> rustkube
@@ -267,4 +249,3 @@ flowchart TB
   vmcloud_image_operator --> stormvm
 ```
 
-The five newest NIC-driver repositories (stormnic-igb, -e1000e, -i40e, -mlx5, -realtek) were created on 2026-10-07 and hold no code yet.

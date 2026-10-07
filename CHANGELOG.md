@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### 2026-10-07
+- **docs:** dellsw (not stormcos) and the five unstarted NIC-driver repos left out (owner)
 - **docs:** "What isn't Rust" table and a component connection diagram (Mermaid) (owner)
 - **docs:** baremetalservices removed: a separate utility, not stormcos (owner)
 - **docs:** root-level CI and build scripts, models and code generation excluded too: 561,342 shipped lines, 95.8% Rust
