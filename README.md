@@ -1,4 +1,4 @@
-# The Mythical Man-Month, 2027
+# The Mythical Man-Month, 2026
 
 *stormcos: an operating system, Kubernetes, storage and networking stack written by one person and a fleet of AI coding sessions.*
 
